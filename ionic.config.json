@@ -1,0 +1,8 @@
+{
+  "name": "geo-loc-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "ef98f2b9"
+}
