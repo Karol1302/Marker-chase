@@ -1,4 +1,4 @@
-# Geolocalization App
+# Geolocation App
 App provides ability to track user's Android phone.
 
 ## Technology
