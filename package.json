@@ -27,6 +27,7 @@
     "@ionic-native/geolocation": "^5.36.0",
     "@ionic-native/native-geocoder": "^5.36.0",
     "@ionic/angular": "^6.1.9",
+    "@tomtom-international/web-sdk-maps": "^6.20.0",
     "ionicons": "^6.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
