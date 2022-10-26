@@ -1,11 +1,37 @@
-<ion-header [translucent]="true">
+<ion-content>
   <ion-toolbar>
     <ion-title>
       Opcje
     </ion-title>
   </ion-toolbar>
-</ion-header>
+  <ion-list>
+    <ion-item>
+          <ion-label>
+            Wybierz mapę startową
+          </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-button (click)="getCurrentCoordinates()">
+          Lokalizuj
+          <ion-icon name="compass-outline"></ion-icon>
+        </ion-button>
+  </ion-label>
+  </ion-item>
+</ion-list>    
 
-<ion-content [fullscreen]="true">
-
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        Szerokość
+      </ion-label>
+      <ion-badge color="danger" slot="end">{{latitude}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Długość
+      </ion-label>
+      <ion-badge color="danger" slot="end">{{longitude}}</ion-badge>
+    </ion-item>
+    </ion-list>    
 </ion-content>
