@@ -7,7 +7,7 @@ import * as L from 'leaflet';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  map: L.map;
+  map: L.Map;
   constructor() {}
 
   ionViewDidEnter(){
