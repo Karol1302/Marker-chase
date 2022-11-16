@@ -1,31 +1,10 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Location
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div class="ion-padding">
-    <ion-button (click)="getCurrentCoordinates()" expand="block">
-      Lokalizuj
-      <ion-icon name="compass-outline"></ion-icon>
-    </ion-button>
+    <ion-list>
+        <ion-item>
+            Zadanie 1
+        </ion-item>
+        <ion-item>
+            Zadanie 2   
+        </ion-item>
+    </ion-list>
 
-  <ion-list>
-    <ion-item>
-      <ion-label>
-        Szerokość
-      </ion-label>
-      <ion-badge color="danger" slot="end">{{latitude}}</ion-badge>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        Długość
-      </ion-label>
-      <ion-badge color="danger" slot="end">{{longitude}}</ion-badge>
-    </ion-item>
-    </ion-list>    
-  </div>
-</ion-content>
