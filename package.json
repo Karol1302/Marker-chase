@@ -32,6 +32,7 @@
     "@tomtom-international/web-sdk-maps": "^6.20.0",
     "ionicons": "^6.0.3",
     "leaflet": "^1.9.2",
+    "leaflet-control-geocoder": "^2.4.0",
     "leaflet-draw": "^1.0.4",
     "leaflet-easybutton": "^2.4.0",
     "leaflet.locatecontrol": "^0.78.0",

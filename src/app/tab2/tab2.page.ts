@@ -4,6 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import 'leaflet-easybutton';
 import { icon, Marker, easyButton } from 'leaflet';
+import {Geocoder, geocoders} from 'leaflet-control-geocoder';
 import { asapScheduler } from 'rxjs';
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -91,6 +92,26 @@ export class Tab2Page {
       }]
     });
     toggle.addTo(map);
+
+    const layerGroup = L.layerGroup(); 
+
+    new Geocoder({
+      defaultMarkGeocode: false
+    })
+      .on('markgeocode', function(e) {
+        layerGroup.clearLayers();
+        var bbox = e.geocode.bbox;
+        var poly = L.polygon([
+          bbox.getSouthEast(),
+          bbox.getNorthEast(),
+          bbox.getNorthWest(),
+          bbox.getSouthWest()
+        ]).addTo(layerGroup);
+        map.fitBounds(poly.getBounds());
+        map.addLayer(layerGroup);
+      })
+      .addTo(map);
+
   
   }
   
