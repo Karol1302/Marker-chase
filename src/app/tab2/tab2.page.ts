@@ -3,7 +3,7 @@ import * as L from 'leaflet';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import 'leaflet-easybutton';
-import { icon, Marker } from 'leaflet';
+import { icon, Marker, easyButton } from 'leaflet';
 import { asapScheduler } from 'rxjs';
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -19,7 +19,6 @@ const iconDefault = icon({
   shadowSize: [41, 41]
 });
 Marker.prototype.options.icon = iconDefault;
-
 
 @Component({
   selector: 'app-tab2',
@@ -83,7 +82,7 @@ export class Tab2Page {
     var toggle = L.easyButton({
       states: [{
         stateName: 'locate',
-        icon: 'fa-map-marker',
+        icon: '<img src="assets/loc-icon.png">',
         title: 'wyśrodkuj',
         onClick: function(position) {
           i = 0

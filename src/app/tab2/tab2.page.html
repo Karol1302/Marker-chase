@@ -1,20 +1,5 @@
-
 <ion-content id="mapId" style="height: 100vw; width: 100vw" [fullscreen]="true"></ion-content>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
 <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-<script>
-        var toggle = L.easyButton({
-      states: [{
-        stateName: 'locate',
-        icon: 'fa-map-marker',
-        title: 'wyśrodkuj',
-        onClick: function(position) {
-          i = 0
-          navigator.geolocation.getCurrentPosition(getPosition)
-        }
-      }]
-    });
-    toggle.addTo(map);
-</script>
