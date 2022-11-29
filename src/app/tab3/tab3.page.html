@@ -1,11 +1,6 @@
 <ion-content>
   <ion-list>
     <ion-item>
-          <ion-label>
-            Wybierz mapę startową
-          </ion-label>
-    </ion-item>
-    <ion-item>
       <ion-label>
         <ion-button (click)="getCurrentCoordinates()">
           Lokalizuj
@@ -13,9 +8,6 @@
         </ion-button>
   </ion-label>
   </ion-item>
-</ion-list>    
-
-  <ion-list>
     <ion-item>
       <ion-label>
         Szerokość
@@ -27,6 +19,12 @@
         Długość
       </ion-label>
       <ion-badge color="danger" slot="end">{{longitude}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Dokładność lokalizacji
+      </ion-label>
+      <ion-badge color="danger" slot="end">{{accuracy}}</ion-badge>
     </ion-item>
     </ion-list>    
 </ion-content>

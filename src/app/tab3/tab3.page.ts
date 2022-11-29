@@ -10,6 +10,7 @@ import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@io
 export class Tab3Page {
   latitude: any = 0;
   longitude: any = 0;
+  accuracy: any = 0;
   address: string;
 
   constructor(
@@ -22,9 +23,13 @@ export class Tab3Page {
     maximumAge: 3600
   };
    getCurrentCoordinates() {
+    this.latitude = 0;
+    this.longitude = 0;
+    this.accuracy = 0;
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
+      this.accuracy = resp.coords.accuracy
      }).catch((error) => {
        console.log('Błąd lokalizowania', error);
      });

@@ -32,11 +32,11 @@ export class Tab2Page {
 
   ionViewDidEnter(){
    var map = L.map('mapId').setView([49.7879,19.1869], 11);
-
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
-     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
+
     // L.control.locate().addTo(map);
     var i = 0
     navigator.geolocation.getCurrentPosition(getPosition)
@@ -94,7 +94,6 @@ export class Tab2Page {
     toggle.addTo(map);
 
     const layerGroup = L.layerGroup(); 
-
     new Geocoder({
       defaultMarkGeocode: false
     })
