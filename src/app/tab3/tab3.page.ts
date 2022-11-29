@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, Input } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
@@ -22,6 +22,7 @@ export class Tab3Page {
     enableHighAccuracy: true, 
     maximumAge: 3600
   };
+
    getCurrentCoordinates() {
     this.latitude = 0;
     this.longitude = 0;
