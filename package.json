@@ -27,10 +27,13 @@
     "@capacitor/status-bar": "4.0.1",
     "@ionic-native/geolocation": "^5.36.0",
     "@ionic-native/native-geocoder": "^5.36.0",
+    "@ionic-native/sqlite": "^5.36.0",
     "@ionic/angular": "^6.1.9",
+    "@ionic/cordova-builders": "^7.0.0",
     "@ionic/lab": "^3.2.15",
     "@runette/ngx-leaflet-locate": "^2.0.4",
     "@tomtom-international/web-sdk-maps": "^6.20.0",
+    "gradle": "^1.2.4",
     "ionicons": "^6.0.3",
     "leaflet": "^1.9.2",
     "leaflet-control-geocoder": "^2.4.0",
@@ -58,8 +61,16 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
+    "cordova-android": "^10.1.2",
+    "cordova-plugin-add-swift-support": "^2.0.2",
+    "cordova-plugin-device": "2.0.2",
     "cordova-plugin-geolocation": "^4.1.0",
+    "cordova-plugin-ionic-keyboard": "^2.0.5",
+    "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-nativegeocoder": "^3.4.1",
+    "cordova-plugin-splashscreen": "5.0.2",
+    "cordova-plugin-statusbar": "2.4.2",
+    "cordova-sqlite-storage": "^6.0.0",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -79,8 +90,19 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-geolocation": {},
-      "cordova-plugin-nativegeocoder": {}
-    }
+      "cordova-plugin-geolocation": {
+        "GPS_REQUIRED": "true"
+      },
+      "cordova-plugin-nativegeocoder": {},
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }
