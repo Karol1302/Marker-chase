@@ -28,6 +28,7 @@
     "@ionic-native/geolocation": "^5.36.0",
     "@ionic-native/native-geocoder": "^5.36.0",
     "@ionic/angular": "^6.1.9",
+    "@ionic/lab": "^3.2.15",
     "@runette/ngx-leaflet-locate": "^2.0.4",
     "@tomtom-international/web-sdk-maps": "^6.20.0",
     "ionicons": "^6.0.3",
