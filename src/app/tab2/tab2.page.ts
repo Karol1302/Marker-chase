@@ -6,6 +6,7 @@ import 'leaflet-easybutton';
 import { icon, Marker, easyButton } from 'leaflet';
 import {Geocoder, geocoders} from 'leaflet-control-geocoder';
 import { asapScheduler } from 'rxjs';
+
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -37,61 +38,75 @@ export class Tab2Page {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-    // L.control.locate().addTo(map);
-    var i = 0
-    navigator.geolocation.getCurrentPosition(getPosition)
 
-    if(!navigator.geolocation)
-    console.log("Nie udało się pobrać lokalizacji")
-    else
-    {
-      setInterval(() => 
-      { i = 1
-        navigator.geolocation.getCurrentPosition(getPosition);
-      }, 5000);
-    }
+    L.control.locate({showCompass: true}).addTo(map);
 
-    var userMarker, userAccuracyCircle
+  //   var lc = L.control
+  // .locate({
+  //   position: "topright",
+  //   strings: {
+  //     title: "Show me where I am, yo!"
+  //   },
+  //   drawCircle: true,
+  // })
+  // .addTo(map);
+
+    // var i = 0
+    // navigator.geolocation.getCurrentPosition(getPosition)
+
+    // if(!navigator.geolocation)
+    // console.log("Nie udało się pobrać lokalizacji")
+    // else
+    // {
+    //   setInterval(() => 
+    //   { i = 1
+    //     navigator.geolocation.getCurrentPosition(getPosition);
+    //   }, 5000);
+    // }
+
+    // var userMarker, userAccuracyCircle
   
-    function getPosition(position)
-    {    
-      var lat = position.coords.latitude
-      var long = position.coords.longitude
-      var accuracy = position.coords.accuracy
+    // function getPosition(position)
+    // {    
+    //   var lat = position.coords.latitude
+    //   var long = position.coords.longitude
+    //   var accuracy = position.coords.accuracy
 
-      if(userMarker)
-      {
-        map.removeLayer(userAccuracyCircle)
-      }
-      if(userAccuracyCircle)
-      {
-        map.removeLayer(userMarker)
-      }
+    //   if(userMarker)
+    //   {
+    //     map.removeLayer(userAccuracyCircle)
+    //   }
+    //   if(userAccuracyCircle)
+    //   {
+    //     map.removeLayer(userMarker)
+    //   }
 
-      userMarker = L.marker([lat, long]),
-      userAccuracyCircle = L.circle([lat, long], {radius: accuracy})
+    //   userMarker = L.marker([lat, long]),
+    //   userAccuracyCircle = L.circle([lat, long], {radius: accuracy})
 
-      var featureGroup = L.featureGroup([userMarker, userAccuracyCircle]).addTo(map)
-      if(i < 1)
-      {
-        map.fitBounds(featureGroup.getBounds())
-      }
-      //console.log(i)
-      console.log( "Latitude: " +lat + " Longitude: " +long +" Accuracy: " +accuracy)
-    }
+    //   var featureGroup = L.featureGroup([userMarker, userAccuracyCircle]).addTo(map)
+    //   if(i < 1)
+    //   {
+    //     map.fitBounds(featureGroup.getBounds())
+    //   }
+    //   //console.log(i)
+    //   console.log( "Latitude: " +lat + " Longitude: " +long +" Accuracy: " +accuracy)
+    //   userMarker.bindPopup("<b>Tutaj jesteś!</b>").openPopup();
+    //   userAccuracyCircle.bindPopup("<b>Dokładność: </b>" + accuracy).openPopup();
+    // }
 
-    var toggle = L.easyButton({
-      states: [{
-        stateName: 'locate',
-        icon: '<img src="assets/loc-icon.png">',
-        title: 'wyśrodkuj',
-        onClick: function(position) {
-          i = 0
-          navigator.geolocation.getCurrentPosition(getPosition)
-        }
-      }]
-    });
-    toggle.addTo(map);
+    // var toggle = L.easyButton({
+    //   states: [{
+    //     stateName: 'locate',
+    //     icon: '<img src="assets/loc-icon.png">',
+    //     title: 'wyśrodkuj',
+    //     onClick: function(position) {
+    //       i = 0
+    //       navigator.geolocation.getCurrentPosition(getPosition)
+    //     }
+    //   }]
+    // });
+    // toggle.addTo(map);
 
     const layerGroup = L.layerGroup(); 
     new Geocoder({
