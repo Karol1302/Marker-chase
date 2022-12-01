@@ -39,74 +39,88 @@ export class Tab2Page {
   }).addTo(map);
 
 
-    L.control.locate({showCompass: true}).addTo(map);
+    // L.control.locate({showCompass: true}).addTo(map);
 
-  //   var lc = L.control
-  // .locate({
-  //   position: "topright",
-  //   strings: {
-  //     title: "Show me where I am, yo!"
-  //   },
-  //   drawCircle: true,
-  // })
-  // .addTo(map);
+    // var lc = L.control
+    // .locate({
+    //   position: "topright",
+    //   strings: {
+    //     title: "Jesteś tu!"
+    //   },
+    //   drawCircle: true,
+    //   showCompass: true,
+    // })
+    // .addTo(map);
 
-    // var i = 0
-    // navigator.geolocation.getCurrentPosition(getPosition)
+    var i = 0
+    Loc();
 
-    // if(!navigator.geolocation)
-    // console.log("Nie udało się pobrać lokalizacji")
-    // else
-    // {
-    //   setInterval(() => 
-    //   { i = 1
-    //     navigator.geolocation.getCurrentPosition(getPosition);
-    //   }, 5000);
-    // }
+    if(!navigator.geolocation)
+    console.log("Nie udało się pobrać lokalizacji")
+    else
+    {
+      setInterval(() => 
+      { i = 1
+        Loc();
+      }, 5000);
+    }
+    // console.log(i);
 
-    // var userMarker, userAccuracyCircle
+    L.marker([50,19]).addTo(map);
+
+    var userMarker, userAccuracyCircle
+
+    // userAccuracyCircle = null
+    console.log(userAccuracyCircle)
   
-    // function getPosition(position)
-    // {    
-    //   var lat = position.coords.latitude
-    //   var long = position.coords.longitude
-    //   var accuracy = position.coords.accuracy
+    function getPosition(position)
+    {    
+      var lat = position.coords.latitude
+      var long = position.coords.longitude
+      var accuracy = position.coords.accuracy
 
-    //   if(userMarker)
-    //   {
-    //     map.removeLayer(userAccuracyCircle)
-    //   }
-    //   if(userAccuracyCircle)
-    //   {
-    //     map.removeLayer(userMarker)
-    //   }
+      if(userMarker)
+      {
+        map.removeLayer(userAccuracyCircle)
+      }
+      if(userAccuracyCircle)
+      {
+        map.removeLayer(userMarker)
+      }
 
-    //   userMarker = L.marker([lat, long]),
-    //   userAccuracyCircle = L.circle([lat, long], {radius: accuracy})
+      console.log(userAccuracyCircle)
+      userMarker = L.marker([lat, long]),
+      userAccuracyCircle = L.circle([lat, long], {radius: accuracy})
+      console.log(userAccuracyCircle)
 
-    //   var featureGroup = L.featureGroup([userMarker, userAccuracyCircle]).addTo(map)
-    //   if(i < 1)
-    //   {
-    //     map.fitBounds(featureGroup.getBounds())
-    //   }
-    //   //console.log(i)
-    //   console.log( "Latitude: " +lat + " Longitude: " +long +" Accuracy: " +accuracy)
-    //   userMarker.bindPopup("<b>Tutaj jesteś!</b>").openPopup();
-    //   userAccuracyCircle.bindPopup("<b>Dokładność: </b>" + accuracy).openPopup();
-    // }
+      var featureGroup = L.featureGroup([userMarker, userAccuracyCircle]).addTo(map)
+      if(i < 1)
+      {
+        map.fitBounds(featureGroup.getBounds())
+      }
+      //console.log(i)
+      // console.log( "Latitude: " +lat + " Longitude: " +long +" Accuracy: " +accuracy)
+      // userMarker.bindPopup("<b>Tutaj jesteś!</b>").openPopup();
+      // userAccuracyCircle.bindPopup("<b>Dokładność: </b>" + accuracy).openPopup();
+    }
+    function Loc()
+    {
+      navigator.geolocation.getCurrentPosition(getPosition);
+    }
 
-    // var toggle = L.easyButton({
-    //   states: [{
-    //     stateName: 'locate',
-    //     icon: '<img src="assets/loc-icon.png">',
-    //     title: 'wyśrodkuj',
-    //     onClick: function(position) {
-    //       i = 0
-    //       navigator.geolocation.getCurrentPosition(getPosition)
-    //     }
-    //   }]
-    // });
-    // toggle.addTo(map);
+    var toggle = L.easyButton({
+      states: [{
+        stateName: 'locate',
+        icon: '<img src="assets/loc-icon.png">',
+        title: 'wyśrodkuj',
+        onClick: function(position) {
+          i = 0;
+          Loc();
+        }
+      }]
+    });
+    toggle.addTo(map);
+    // console.log(i);
 
     const layerGroup = L.layerGroup(); 
     new Geocoder({

@@ -13,6 +13,10 @@ export class Tab3Page {
   accuracy: any = 0;
   address: string;
 
+  toogleAccuracy(){
+    console.log("siema")
+  }
+
   constructor(
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder
@@ -30,10 +34,11 @@ export class Tab3Page {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
-      this.accuracy = resp.coords.accuracy
+      this.accuracy = Math.round(resp.coords.accuracy)
      }).catch((error) => {
        console.log('Błąd lokalizowania', error);
      });
+
   }
   nativeGeocoderOptions: NativeGeocoderOptions = {
     useLocale: true,
