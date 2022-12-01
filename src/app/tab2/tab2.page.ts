@@ -6,6 +6,8 @@ import 'leaflet-easybutton';
 import { icon, Marker, easyButton } from 'leaflet';
 import {Geocoder, geocoders} from 'leaflet-control-geocoder';
 import { asapScheduler } from 'rxjs';
+import { NavigationExtras, Router } from '@angular/router';
+
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -22,6 +24,15 @@ const iconDefault = icon({
 });
 Marker.prototype.options.icon = iconDefault;
 
+var greenMarker = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -29,30 +40,23 @@ Marker.prototype.options.icon = iconDefault;
 })
 export class Tab2Page {
   map: L.Map;
-  constructor() {}
+  latitude: any = 0;
+  longitude: any = 0;
+  accuracy: any = 0;
+  i: number = 0;
+ 
+  constructor(private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder) {}
 
   ionViewDidEnter(){
+  this.getCurrentCoordinates();
    var map = L.map('mapId').setView([49.7879,19.1869], 11);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-
-    // L.control.locate({showCompass: true}).addTo(map);
-
-    // var lc = L.control
-    // .locate({
-    //   position: "topright",
-    //   strings: {
-    //     title: "Jesteś tu!"
-    //   },
-    //   drawCircle: true,
-    //   showCompass: true,
-    // })
-    // .addTo(map);
-
-    var i = 0
+    var i = 0;
     Loc();
 
     if(!navigator.geolocation)
@@ -60,21 +64,21 @@ export class Tab2Page {
     else
     {
       setInterval(() => 
-      { i = 1
+      { 
+        i = 1;
+        console.log(i);
         Loc();
-      }, 5000);
+      }, 2000);
     }
-    // console.log(i);
+     console.log(i);
 
-    L.marker([50,19]).addTo(map);
+    var questMarker1 = L.marker([49.92,19.21],{icon: greenMarker}).addTo(map);
+    questMarker1.bindPopup("<b>Wskazówki dotarcia...</b>");
 
     var userMarker, userAccuracyCircle
 
-    // userAccuracyCircle = null
-    console.log(userAccuracyCircle)
-  
     function getPosition(position)
-    {    
+    {     
       var lat = position.coords.latitude
       var long = position.coords.longitude
       var accuracy = position.coords.accuracy
@@ -88,21 +92,19 @@ export class Tab2Page {
         map.removeLayer(userMarker)
       }
 
-      console.log(userAccuracyCircle)
-      userMarker = L.marker([lat, long]),
-      userAccuracyCircle = L.circle([lat, long], {radius: accuracy})
-      console.log(userAccuracyCircle)
-
+      userAccuracyCircle = L.circle([lat, long], {radius: accuracy}),
+      userMarker = L.marker([lat, long])
       var featureGroup = L.featureGroup([userMarker, userAccuracyCircle]).addTo(map)
       if(i < 1)
       {
         map.fitBounds(featureGroup.getBounds())
       }
-      //console.log(i)
-      // console.log( "Latitude: " +lat + " Longitude: " +long +" Accuracy: " +accuracy)
+
+      console.log( "Latitude: " +lat + " Longitude: " +long +" Accuracy: " +accuracy)
       // userMarker.bindPopup("<b>Tutaj jesteś!</b>").openPopup();
       // userAccuracyCircle.bindPopup("<b>Dokładność: </b>" + accuracy).openPopup();
     }
+    
     function Loc()
     {
       navigator.geolocation.getCurrentPosition(getPosition);
@@ -139,9 +141,23 @@ export class Tab2Page {
         map.addLayer(layerGroup);
       })
       .addTo(map);
-
+      
   
   }
+  getCurrentCoordinates() {
+    this.latitude = 0;
+    this.longitude = 0;
+    this.accuracy = 0;
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.latitude = resp.coords.latitude;
+      this.longitude = resp.coords.longitude;
+      this.accuracy = Math.round(resp.coords.accuracy);
+      }).catch((error) => {
+        console.log('Błąd lokalizowania', error);
+      });
+  }
+
+
   
 
 }

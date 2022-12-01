@@ -1,28 +1,26 @@
-<ion-content>
+<ion-header>
+  <ion-toolbar>
+      <ion-title>Opcje</ion-title>
+  </ion-toolbar>
+  </ion-header>
+<ion-content  [fullscreen]="true" class="ion-padding">
   <ion-list class = "list">
     <ion-item>
-      Koło dokładności
-      <ion-toggle slot="end" click ="toogleAccuracy()" [checked]="true" ></ion-toggle>
+      <p>Koło dokładności</p>
+      <ion-toggle slot="end" (click) ="toogleAccuracy()" [checked]="true" ></ion-toggle>
   </ion-item>
   <ion-item>
-    Podążanie za graczem
-    <ion-toggle slot="end" [checked]="true"></ion-toggle>
+    <p>Podążanie za graczem</p>
+    <ion-toggle slot="end" (click) ="toogleFollow()" [checked]="true"></ion-toggle>
 </ion-item>
     <ion-item>
-        Szerokość
-      <ion-badge color="danger" slot="end">{{latitude}}</ion-badge>
+        <p>Szerokość</p>
     </ion-item>
     <ion-item>
-        Długość
-      <ion-badge color="danger" slot="end">{{longitude}}</ion-badge>
+        <p>Długość</p>
     </ion-item>
     <ion-item>
-        Dokładność (m)
-      <ion-badge color="danger" slot="end">{{accuracy}}</ion-badge>
+        <p>Dokładność (m)</p>
     </ion-item>
     </ion-list>    
 </ion-content>
-<ion-button class = "lokalizuj" (click)="getCurrentCoordinates()">
-  Odśwież
-  <ion-icon name="compass-outline"></ion-icon>
-</ion-button>
