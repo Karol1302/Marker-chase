@@ -75,7 +75,6 @@ export class Tab2Page {
     var qlong1 = 19.22283; 
     var z = 0;
     var p = true;
-    var w = 0;
 
     function getPosition(position)
     {     
@@ -116,12 +115,7 @@ export class Tab2Page {
 
       if((((lat - qlat1 < 0.00005) && (long - qlong1 < 0.00005)) || ((qlat1 - lat < 0.00005) && (qlong1 - long < 0.00005))||
           ((qlat1 - lat < 0.00005) && (long - qlong1 < 0.00005)) || ((qlat1 - lat < 0.00005) && (long - qlong1 < 0.00005)))){
-       if(w < 1){
-        
-          questMarker1.bindPopup("<b>Mam dla Ciebie zagadkę</b><br><ion-button >Click Me</ion-button>").openPopup();
-       }
-        console.log(w)
-        w++;
+      
       }
 
       z++;
