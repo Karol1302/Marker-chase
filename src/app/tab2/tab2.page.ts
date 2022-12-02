@@ -24,7 +24,7 @@ const iconDefault = icon({
 });
 Marker.prototype.options.icon = iconDefault;
 
-var greenMarker = new L.Icon({
+var redMarker = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
   iconSize: [25, 41],
@@ -66,16 +66,15 @@ export class Tab2Page {
       setInterval(() => 
       { 
         i = 1;
-        console.log(i);
         Loc();
       }, 2000);
     }
-     console.log(i);
-
-    var questMarker1 = L.marker([49.92,19.21],{icon: greenMarker}).addTo(map);
-    questMarker1.bindPopup("<b>Wskazówki dotarcia...</b>");
 
     var userMarker, userAccuracyCircle
+    var qlat1 = 49.88072;
+    var qlong1 = 19.22283; 
+    var z = 0;
+    var p = true;
 
     function getPosition(position)
     {     
@@ -91,7 +90,6 @@ export class Tab2Page {
       {
         map.removeLayer(userMarker)
       }
-
       userAccuracyCircle = L.circle([lat, long], {radius: accuracy}),
       userMarker = L.marker([lat, long])
       var featureGroup = L.featureGroup([userMarker, userAccuracyCircle]).addTo(map)
@@ -101,8 +99,29 @@ export class Tab2Page {
       }
 
       console.log( "Latitude: " +lat + " Longitude: " +long +" Accuracy: " +accuracy)
+
       // userMarker.bindPopup("<b>Tutaj jesteś!</b>").openPopup();
-      // userAccuracyCircle.bindPopup("<b>Dokładność: </b>" + accuracy).openPopup();
+      // userAccuracyCircle.bindPopup("<b>Dokładność: </b>" + accuracy).openPopup()
+  
+      // if(z > 0)
+      // {
+      //   map.removeLayer(questMarker1)
+      // }
+
+      if(z < 1){
+        var questMarker1 = L.marker([qlat1,qlong1],{icon: redMarker}).addTo(map);
+        questMarker1.bindPopup("<b>Wskazówki dotarcia...</b>");
+      }
+
+      if(
+          ((lat - qlat1 < 0.00005) && (long - qlong1 < 0.00005)) || ((qlat1 - lat < 0.00005) && (qlong1 - long < 0.00005))||
+          ((qlat1 - lat < 0.00005) && (long - qlong1 < 0.00005)) || ((qlat1 - lat < 0.00005) && (long - qlong1 < 0.00005))
+        )
+      { if(z < 1)
+          questMarker1.bindPopup("<b>Mam dla Ciebie zagadakę...</b>");
+        // map.removeLayer(questMarker1);
+      }
+      z++
     }
     
     function Loc()
