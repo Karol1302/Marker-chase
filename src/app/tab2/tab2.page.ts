@@ -7,6 +7,8 @@ import { icon, Marker, easyButton } from 'leaflet';
 import {Geocoder, geocoders} from 'leaflet-control-geocoder';
 import { asapScheduler } from 'rxjs';
 import { NavigationExtras, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { BrowserStack } from 'protractor/built/driverProviders';
 
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -38,19 +40,60 @@ var redMarker = new L.Icon({
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
+
 export class Tab2Page {
   map: L.Map;
   latitude: any = 0;
   longitude: any = 0;
   accuracy: any = 0;
   i: number = 0;
- 
+  zadanie: number = 0;
+  ZLong: any;
+  ZLat: any;
+
+  qlat1: number = 49.89072;
+  qlong1: number = 19.22203;
+  qlat2: number = 49.88072;
+  qlong2: number = 19.383;
+  qlat3: number = 50.78072;
+  qlong3: number = 19.12283;
+  
   constructor(private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder) {}
+  private nativeGeocoder: NativeGeocoder, private alertController: AlertController) {}
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Please enter your info',
+      buttons: ['OK'],
+      inputs: [
+        {
+          placeholder: 'Name',
+        },
+        {
+          placeholder: 'Nickname (max 8 characters)',
+          attributes: {
+            maxlength: 8,
+          },
+        },
+        {
+          type: 'number',
+          placeholder: 'Age',
+          min: 1,
+          max: 100,
+        },
+        {
+          type: 'textarea',
+          placeholder: 'A little about yourself',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 
   ionViewDidEnter(){
   this.getCurrentCoordinates();
-   var map = L.map('mapId').setView([49.7879,19.1869], 11);
+   var map = L.map('mapId').setView([this.qlat1, this.qlong1], 11);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -71,10 +114,53 @@ export class Tab2Page {
     }
 
     var userMarker, userAccuracyCircle
-    var qlat1 = 50.88072;
-    var qlong1 = 19.22283; 
+
+
+    var questMarker1 = L.marker([49.9, 19.222],{icon: redMarker}).addTo(map);
+    questMarker1.bindPopup("<b>Wskazówki dotarcia do zadania 1...</b>");
+
+    switch(this.zadanie){
+      case 0:
+        this.ZLong = this.qlong1;
+        this.ZLat  = this.qlat1;
+        console.log("Zadanie 1");
+      break;
+      case 1:
+        this.ZLong = this.qlong2;
+        this.ZLat  = this.qlat2;
+        map.removeLayer(questMarker1);
+        var questMarker2 = L.marker([this.qlat2,this.qlong2],{icon: redMarker}).addTo(map);
+        questMarker2.bindPopup("<b>Wskazówki dotarcia do zadania 2...</b>");
+        console.log("Zadanie 2")
+      break;
+      case 2:
+        this.ZLong = this.qlong3;
+        this.ZLat  = this.qlat3;
+        map.removeLayer(questMarker1);
+        var questMarker3 = L.marker([this.qlat3,this.qlong3],{icon: redMarker}).addTo(map);
+        questMarker3.bindPopup("<b>Wskazówki dotarcia do zadania 3...</b>");
+        console.log("Zadanie 3")
+      break;
+      case 3:
+        console.log("Wygrana");
+        console.log(3)
+      break;
+    }
+
+    var Check = ((((this.latitude - this.ZLat < 0.00005) && (this.longitude - this.ZLong < 0.00005)) || ((this.ZLat - this.latitude < 0.00005) && (this.ZLong - this.longitude < 0.00005))||
+    ((this.ZLat - this.latitude < 0.00005) && (this.longitude - this.ZLong < 0.00005)) || ((this.ZLat - this.latitude < 0.00005) && (this.longitude - this.ZLong < 0.00005))));
+
+    console.log(!Check)
+    if(!Check){
+      this.presentAlert();
+      //Teraz prawidłowe rozwiązanie będzie mogło puścić switcha z zadaniem
+    }
     var z = 0;
-    var p = true;
+
+    //Trzeba jeszcze zrobic emulator
+    //Odświerzanie lokalizacji w opcjach
+    //Działające przyciski w opcjach
+    //Koordynaty z zadań do jakiejś bazy
 
     function getPosition(position)
     {     
@@ -93,6 +179,7 @@ export class Tab2Page {
       userAccuracyCircle = L.circle([lat, long], {radius: accuracy}),
       userMarker = L.marker([lat, long])
       var featureGroup = L.featureGroup([userMarker, userAccuracyCircle]).addTo(map)
+
       if(i < 1)
       {
         map.fitBounds(featureGroup.getBounds())
@@ -109,15 +196,9 @@ export class Tab2Page {
       // }
 
       if(z < 1){
-        var questMarker1 = L.marker([qlat1,qlong1],{icon: redMarker}).addTo(map);
-        questMarker1.bindPopup("<b>Wskazówki dotarcia...</b>");
+        // var questMarker1 = L.marker([qlat1,qlong1],{icon: redMarker}).addTo(map);
+        // questMarker1.bindPopup("<b>Wskazówki dotarcia...</b>");
       }
-
-      if((((lat - qlat1 < 0.00005) && (long - qlong1 < 0.00005)) || ((qlat1 - lat < 0.00005) && (qlong1 - long < 0.00005))||
-          ((qlat1 - lat < 0.00005) && (long - qlong1 < 0.00005)) || ((qlat1 - lat < 0.00005) && (long - qlong1 < 0.00005)))){
-      
-      }
-
       z++;
     }
     
