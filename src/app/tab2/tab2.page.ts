@@ -61,39 +61,11 @@ export class Tab2Page {
   constructor(private geolocation: Geolocation,
   private nativeGeocoder: NativeGeocoder, private alertController: AlertController) {}
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Please enter your info',
-      buttons: ['OK'],
-      inputs: [
-        {
-          placeholder: 'Name',
-        },
-        {
-          placeholder: 'Nickname (max 8 characters)',
-          attributes: {
-            maxlength: 8,
-          },
-        },
-        {
-          type: 'number',
-          placeholder: 'Age',
-          min: 1,
-          max: 100,
-        },
-        {
-          type: 'textarea',
-          placeholder: 'A little about yourself',
-        },
-      ],
-    });
-
-    await alert.present();
-  }
 
   ionViewDidEnter(){
-  this.getCurrentCoordinates();
-   var map = L.map('mapId').setView([this.qlat1, this.qlong1], 11);
+
+    this.getCurrentCoordinates();
+    var map = L.map('mapId').setView([this.qlat1, this.qlong1], 11);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -113,11 +85,25 @@ export class Tab2Page {
       }, 2000);
     }
 
-    var userMarker, userAccuracyCircle
+    var userMarker, userAccuracyCircle;
 
+    //markery z zadaniami
+    // nalezy dac questMarker a potem SetLngLong ustawiac dane
 
     var questMarker1 = L.marker([49.9, 19.222],{icon: redMarker}).addTo(map);
     questMarker1.bindPopup("<b>Wskazówki dotarcia do zadania 1...</b>");
+
+
+    // var edgeMarkerLayer = L.EdgeMarker({
+    //   icon: L.icon({ // style markers
+    //       iconUrl: 'images/edge-arrow-marker-black.png',
+    //       //clickable: true,
+    //       iconSize: [48, 48],
+    //       iconAnchor: [24, 24]
+    //   }),
+    //   rotateIcons: true, // rotate EdgeMarkers depending on their relative position
+    //   layerGroup: lGroup // you can specify a certain L.layerGroup to create the edge markers from.
+    // }).addTo(map);
 
     switch(this.zadanie){
       case 0:
@@ -158,9 +144,11 @@ export class Tab2Page {
     var z = 0;
 
     //Trzeba jeszcze zrobic emulator
-    //Odświerzanie lokalizacji w opcjach
-    //Działające przyciski w opcjach
+    //Odświerzanie lokalizacji w opcjach trochę do dupy bo będziesz przesuwał a program będzie wracał
+    //Usuwanie kółka (może)
     //Koordynaty z zadań do jakiejś bazy
+    //jeden questmarker, tylko zmiana set'a
+    //uporządkować zmienne i this
 
     function getPosition(position)
     {     
@@ -237,10 +225,9 @@ export class Tab2Page {
         map.fitBounds(poly.getBounds());
         map.addLayer(layerGroup);
       })
-      .addTo(map);
-      
-  
+      .addTo(map);  
   }
+
   getCurrentCoordinates() {
     this.latitude = 0;
     this.longitude = 0;
@@ -252,6 +239,36 @@ export class Tab2Page {
       }).catch((error) => {
         console.log('Błąd lokalizowania', error);
       });
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Please enter your info',
+      buttons: ['OK'],
+      inputs: [
+        {
+          placeholder: 'Name',
+        },
+        {
+          placeholder: 'Nickname (max 8 characters)',
+          attributes: {
+            maxlength: 8,
+          },
+        },
+        {
+          type: 'number',
+          placeholder: 'Age',
+          min: 1,
+          max: 100,
+        },
+        {
+          type: 'textarea',
+          placeholder: 'A little about yourself',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
 
