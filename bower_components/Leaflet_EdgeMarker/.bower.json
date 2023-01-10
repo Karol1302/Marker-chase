@@ -1,0 +1,29 @@
+{
+  "name": "Leaflet_EdgeMarker",
+  "homepage": "https://github.com/ubergesundheit/Leaflet.EdgeMarker",
+  "authors": [],
+  "description": "Leaflet EdgeMarker is a Leaflet plugin which allows you to indicate Markers, Circles and CircleMarkers that are outside of the current view by displaying CircleMarkers at the edges of the map.",
+  "main": "Leaflet.EdgeMarker.js",
+  "keywords": [
+    "leaflet",
+    "edge"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "6da015fe51",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "6da015fe51b3c3440ce58df80ffa9b1f976a74c6"
+  },
+  "_source": "https://github.com/ubergesundheit/Leaflet.EdgeMarker.git",
+  "_target": "*",
+  "_originalSource": "Leaflet.EdgeMarker",
+  "_direct": true
+}

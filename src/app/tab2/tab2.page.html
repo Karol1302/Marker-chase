@@ -1,1 +1,50 @@
-<ion-content id="mapId" style="height: 100vw; width: 100vw" [fullscreen]="true"></ion-content>
+<!-- <ion-content id="mapId" class="no-scroll" style="height: 100vw; width: 100vw" [fullscreen]="true"></ion-content> -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.js" charset="utf-8"></script> -->
+<a href="https://github.com/ubergesundheit/Leaflet.EdgeMarker"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
+
+<ion-menu contentId = "main-content" side="end">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Opcje</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-item>
+            <p>Koło dokładności</p>
+            <ion-toggle color="tertiary" slot="end" (click) ="toogleCircle()" [checked]="true" ></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <p>Podążanie za graczem</p>
+            <ion-toggle color="tertiary" slot="end" (click) ="toogleFollow()" [checked]="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <p>Długość</p>
+            <ion-badge color="danger" slot="end">{{latitude}}</ion-badge>
+        </ion-item>
+        <ion-item>
+            <p>Szerokość</p>
+            <ion-badge color="danger" slot="end">{{longitude}}</ion-badge>
+        </ion-item>
+        <ion-item>
+            <p>Dokładność (m)</p>
+            <ion-badge color="danger" slot="end">{{accuracy}}</ion-badge>
+        </ion-item>
+    </ion-content>
+  </ion-menu>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Mapa gry</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content id="mapId" class="no-scroll" style="height: 100vw; width: 100vw" [fullscreen]="false"></ion-content>
+  </div>

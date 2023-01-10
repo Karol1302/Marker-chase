@@ -1,9 +1,21 @@
 ion-checkbox {
     --size: 32px;
     --background-checked: #6815ec;
-  }
-  
-  ion-checkbox::part(container) {
-    border-radius: 6px;
-    border: 2px solid #6815ec;
-  }
+  } 
+ion-checkbox::part(container) {
+  border-radius: 6px;
+  border: 2px solid #6815ec;
+}
+.no-scroll {
+  --overflow: hidden;
+}
+ion-menu::part(backdrop) {
+  background-color: #38f;
+
+}
+
+ion-menu::part(container) {
+  border-radius: 20px 0 0 20px;
+  box-shadow: 4px 4px 16px 16px rgba(0, 110, 255, 0.5);
+  opacity: 0.95;
+}

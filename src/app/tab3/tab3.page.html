@@ -1,32 +1,26 @@
-<ion-content>
-  <ion-list>
+<ion-header>
+  <ion-toolbar>
+      <ion-title>Opcje</ion-title>
+  </ion-toolbar>
+  </ion-header>
+<ion-content  [fullscreen]="true" class="ion-padding">
+  <ion-list class = "list">
     <ion-item>
-          <ion-label>
-            Wybierz mapę startową
-          </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <ion-button (click)="getCurrentCoordinates()">
-          Lokalizuj
-          <ion-icon name="compass-outline"></ion-icon>
-        </ion-button>
-  </ion-label>
+      <p>Koło dokładności</p>
+      <ion-toggle slot="end" (click) ="toogleAccuracy()" [checked]="true" ></ion-toggle>
   </ion-item>
-</ion-list>    
-
-  <ion-list>
+  <ion-item>
+    <p>Podążanie za graczem</p>
+    <ion-toggle slot="end" (click) ="toogleFollow()" [checked]="true"></ion-toggle>
+</ion-item>
     <ion-item>
-      <ion-label>
-        Szerokość
-      </ion-label>
-      <ion-badge color="danger" slot="end">{{latitude}}</ion-badge>
+        <p>Szerokość</p>
     </ion-item>
     <ion-item>
-      <ion-label>
-        Długość
-      </ion-label>
-      <ion-badge color="danger" slot="end">{{longitude}}</ion-badge>
+        <p>Długość</p>
+    </ion-item>
+    <ion-item>
+        <p>Dokładność (m)</p>
     </ion-item>
     </ion-list>    
 </ion-content>
