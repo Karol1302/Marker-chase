@@ -9,4 +9,4 @@ The application is a new incarnation of the classic game of Hare and Hounds or C
 <img src="img/5.png" alt="drawing" width="300"/>
 
 ## Technology
-The application was built using the popular Ionic framework and Angular. The map feature is provided by lefalet.
+The application was built using the popular Ionic framework and Angular. The map feature is provided by lefalet. The application was tested using google pixel emulators in andorid studio and a physical xiomi remi note 8 pro device.
